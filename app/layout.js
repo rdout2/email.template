@@ -1,6 +1,10 @@
 import { Roboto, Roboto_Mono } from "next/font/google"; // Exemple de polices
 import "./globals.css";
 import provider from "./provider";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { ClerkProvider } from "@clerk/nextjs";
+
+
 const roboto = Roboto({
   variable: "--font-roboto",
   subsets: ["latin"],
@@ -19,14 +23,14 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
+    <ClerkProvider>
     <html lang="en">
-      <body
-        className={`${roboto.variable} ${robotoMono.variable} antialiased`}
-      >
-        <provider>
+      <body className={`${roboto.variable} ${robotoMono.variable} antialiased`}>
+        
           {children}
-        </provider>
+       
       </body>
     </html>
+  </ClerkProvider>
   );
 }

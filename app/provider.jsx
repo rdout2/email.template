@@ -1,16 +1,19 @@
 "use client";
-import React from 'react'
+
+import React from 'react';
 import { ConvexProvider, ConvexReactClient } from "convex/react";
-function provider(children) {
-    const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL);
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
+const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL);
+
+function Provider({ children }) {
   return (
-    
     <ConvexProvider client={convex}>
-        <div>
-            {children}
-        </div>
+      <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
+        {children}
+      </GoogleOAuthProvider>
     </ConvexProvider>
-  )
+  );
 }
 
-export default provider
+export default Provider;
