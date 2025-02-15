@@ -1,13 +1,19 @@
 import React from 'react'
 import Image from 'next/image';
 import { Button } from '../ui/button';
-import { Code, CodeSquare } from 'lucide-react';
+import { Code, CodeSquare, Monitor, Smartphone } from 'lucide-react';
 
 function EditorHeaader() {
   return (
     <div className='p-4 shadow-sm flex justify-between'>
     <Image src='/logo.svg' alt='logo' width={180} height={140} priority />
      <div>
+        <Button variant="ghost">
+            <Monitor/> Desktop
+        </Button>
+        <Button  variant="ghost">
+            <Smartphone/> Mobile
+        </Button>
 
      </div>
      <div className='flex gap-3'>
