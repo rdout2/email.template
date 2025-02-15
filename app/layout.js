@@ -3,7 +3,8 @@ import "./globals.css";
 import provider from "./provider";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ClerkProvider } from "@clerk/nextjs";
-
+import Provider from "./provider";
+import EditorHeader from "@/components/custom/EditorHeaader";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -26,9 +27,10 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
     <html lang="en">
       <body className={`${roboto.variable} ${robotoMono.variable} antialiased`}>
-        
-          {children}
-       
+      <Provider>
+          
+          <main>{children}</main>
+        </Provider>
       </body>
     </html>
   </ClerkProvider>
