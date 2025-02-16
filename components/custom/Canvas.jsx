@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import { useDragElementLayout, useEmailTemplate, useScreenSize } from '@/app/provider';
+import ColumnLayout from '../LayoutElements/ColumnLayout';
 
 function Canvas() {
   const emailTemplateHook = useEmailTemplate();
@@ -26,6 +27,14 @@ function Canvas() {
     setDragElementLayout(null);
   }
 
+  const getLayoutComponents = (element) => {
+    if (element?.type === 'column') {
+      return <ColumnLayout numOfCol={element.numOfCol} />;
+    }
+    // Add more conditions for other layout types
+    return null;
+  }
+
   return (
     <div className="mt-20 flex justify-center">
       <div 
@@ -34,12 +43,15 @@ function Canvas() {
         onDragOver={onDragOver}
         onDrop={onDropHandle}
       >
-        {emailTemplate.map((element, index) => (
-          <div key={index}>
-            {element.type === 'text' && <p>{element.content}</p>}
-            {element.type === 'image' && <img src={element.src} alt={element.alt} />}
-          </div>
-        ))}
+        {emailTemplate && emailTemplate.length > 0 ? (
+          emailTemplate.map((element, index) => (
+            <div key={index}>
+              {getLayoutComponents(element)}
+            </div>
+          ))
+        ) : (
+          <p className='p-2 text-center bg-gray-100 border border-dashed'>Drag and drop elements here</p>
+        )}
       </div>
     </div>
   );
